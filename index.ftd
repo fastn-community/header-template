@@ -31,11 +31,12 @@ string site-url:
 
 -- ftd.text: Implement the **header** component here
 color: $inherited.colors.text
-background.solid: $inherited.colors.background.step-2
+background.solid: $inherited.colors.background.base
 width: fill-container
 height: fill-container
 text-align: center
-padding-vertical.px: 20
+role: $inherited.types.copy-regular
+padding-vertical.px: 32
 
 ;; =============================================================================
 ;; ================================== END ======================================
