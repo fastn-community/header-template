@@ -24,7 +24,7 @@ The `index.ftd` file contains placeholders that you can replace with your own in
 ### 1. Replace Package Information
 
 In the section labeled "DOCUMENTATION FOR YOUR CARD COMPONENTS", locate the 
-`docs.home-card` component and check the following placeholders:
+`docs.home component and check the following placeholders:
 
 **Note:** All these are auto-filled values during repository creation
 
@@ -33,42 +33,30 @@ In the section labeled "DOCUMENTATION FOR YOUR CARD COMPONENTS", locate the
 - `license-url`: URL to the license of your choice (e.g., MIT License) (This 
   is currently commented, you can uncomment it if you want to include license.)
 - `github`: Your GitHub Repository URL
+- `created-by`: Your name
 
-### 2. Implement Front and Back Components
+### 2. Implement Header Components
 
-In the "DEFINE YOUR CARD COMPONENTS" section, you will find placeholders for implementing the front and back components of your business card.
+In the "DEFINE YOUR HEADER COMPONENTS" section, you will find placeholders for implementing the header components of your header.
 
-For the both `front` and `back` component, you need to use the following 
-headers (card details):
+For the `header` component, you need to use the following 
+headers (header details):
 
 **Note:** These headers will be used by the users for filling in their 
 information. It's mandatory to use all these headers while creating your 
 component.
 
-- `caption name`: You name (e.g., "John Doe")
-- `string title`: Your job title
-- `string company-name`: Your company name
-- `ftd.image-src logo`: Image asset or Image URL to your company logo
-- `optional string contact-1`: Your primary contact number (Optional for user)
-- `optional string contact-2`: Your secondary contact number (Optional for user)
-- `optional string email`: Your email (Optional for user)
-- `optional string website`: Your email or social media link (Optional for user)
-- `optional string address`: Your address (Optional for user)
-- `optional string company-slogan`: A slogan or tagline for your company 
+- `caption site-name`: Your site name (e.g., "John Doe")
+- `string site-url`: Your site url
+- `string site-logo`: Your site logo
   (Optional for user)
 
-If you want to create a **portrait** mode business card design, you can 
-uncomment the `landscape: false` (line number: 39) in `lib.display-card` 
-component invocation in `index.ftd` file
 
-Replace the code present in the line numbers 47 to 52 with actual card's 
-`front` side component implementation/definition.
-Similarly, replace the code present in the line numbers 66 to 71 with actual 
-card's `back` side component implementation/definition.
+Replace the code present in the line numbers 32 to 38 with actual header 
+component implementation/definition.
 
-**Note:** It is **recommended** to create a `component/front.ftd` and 
-`component/back.ftd` files for implementing `front` side and `back` side 
-components respectively.
+**Note:** It is **recommended** to create a `component/header.ftd`  files for
+implementing components respectively.
 
 Also, `assets` for your package is auto-imported, you can use `assets` to 
 add image etc. (Checkout `FASTN.ftd` file).
@@ -77,8 +65,7 @@ add image etc. (Checkout `FASTN.ftd` file).
 
 Replace the preview image with your template image 
 
-- For `front` side: In [`.github/assets/front.png`](.github/assets/front.png)
-- For `back` side: In [`.github/assets/back.png`](.github/assets/back.png) 
+- For `image` side: In [`.github/assets/header.png`](.github/assets/header.png)
 
 
 ## Publishing your category design on Github page:
@@ -94,13 +81,11 @@ Also add the live site link in **About** section of github repository.
 The sitemap present in `FASTN.ftd` is used to organise your package. 
 This uses 
 
-- `index.ftd`: It is the homepage which shows preview of front and back for 
-  your card
-- `how-to-use.ftd`: It is page that gives the detail descriptions about each 
-  fields in the card component and how to use your package. It also shows 
-  some variant of this card (like when some fields are present).
+- `index.ftd`: It is the homepage which shows preview of  
+  your header
 
-The documentation for this template comes from [`business-card`](fastn-community.github.io/business-card)
+
+The documentation for this template comes from [`sitemap-header-template`](fastn-community.github.io/sitemap-header-template)
 
 
 *To know more about `fastn`, visit [`fastn` website](https://fastn.com/). Also 

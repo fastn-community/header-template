@@ -1,6 +1,6 @@
 # Header Component
 
-The **Business Card Component** is a simple and customizable way to display 
+The **Header Component** is a simple and customizable way to display 
 business card information within your `fastn` pacakge. With just a few lines of 
 code, you can showcase your contact details, company information, even 
 include a logo and others.
@@ -33,10 +33,6 @@ To use the Business Card Component in your `fastn` package, follow these steps:
    -- header.header: My Site
    site-logo: $assets.files.images.ipsum-logo.svg
    site-url: /
-   
-   -- ftd.text: Hello
-   
-   -- end: header.header
    ```
    
 ## Customization
