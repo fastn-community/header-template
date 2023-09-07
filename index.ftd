@@ -24,8 +24,6 @@ category: __user_name__.github.io/__repo_name__
 optional caption site-name:
 optional ftd.image-src site-logo:
 string site-url:
-children extra-header-items:
-boolean show-sitemap-data: true
 
 ;; =============================================================================
 ;; =======================<IMPLEMENT THE HEADER HERE>===========================
