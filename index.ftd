@@ -4,7 +4,7 @@
 
 
 
-;; ---------------- DOCUMENTATION FOR YOUR CARD COMPONENTS ----------------------
+;; ---------------- DOCUMENTATION FOR YOUR HEADER COMPONENTS ----------------------
 ;; This renders the default documentation
 
 -- docs.home:
@@ -17,8 +17,8 @@ category: __user_name__.github.io/__repo_name__
 
 
 
-;; ---------------- DEFINE YOUR CARD COMPONENTS -----------------------
-;; Implement your card and card-back components below
+;; ---------------- DEFINE YOUR HEADER COMPONENTS -----------------------
+;; Implement your header components below
 
 -- component header:
 optional caption site-name:

@@ -369,7 +369,7 @@ class MutableList {
         let current_list = this.#list;
         let new_list = [];
         for (let idx in current_list) {
-            new_list.push( { item: fastn_utils.clone(current_list[idx].item), index: new Mutable(parseInt(idx)) });
+            new_list.push(fastn_utils.clone(current_list[idx].item));
         }
         return new MutableList(new_list);
     }
@@ -2136,8 +2136,20 @@ class Node2 {
                 }
                 const is_dark_mode = ftd.dark_mode.get();
                 const src = staticValue.get(is_dark_mode ? 'dark' : 'light');
-
-                this.attachAttribute("src", fastn_utils.getStaticValue(src));
+                if (!ssr) {
+                    let image_node = this.#node;
+                    if( image_node.nodeName.toLowerCase() === "a" ) {
+                        let childNodes = image_node.childNodes;
+                        childNodes.forEach(function(child) {
+                            if (child.nodeName.toLowerCase() === "img")
+                                image_node = child;
+                        });
+                    }
+                    image_node.setAttribute("src", fastn_utils.getStaticValue(src));
+                }
+                else {
+                    this.attachAttribute("src", fastn_utils.getStaticValue(src));
+                }
             }).addNodeProperty(this, null, inherited));
             this.#mutables.push(ftd.dark_mode);
         } else if (kind === fastn_dom.PropertyKind.Alt) {
@@ -3859,6 +3871,9 @@ ftd.toggle = function (args) {
   try {
     let __args__ = args;
     let fastn_utils_val___args___a = fastn_utils.clone(!fastn_utils.getter(__args__.a));
+    if (fastn_utils_val___args___a instanceof fastn.mutableClass) {
+      fastn_utils_val___args___a = fastn_utils_val___args___a.get();
+    }
     if (!fastn_utils.setter(__args__.a, fastn_utils_val___args___a)) {
       __args__.a = fastn_utils_val___args___a;
     }
@@ -3872,6 +3887,9 @@ ftd.increment = function (args) {
   try {
     let __args__ = args;
     let fastn_utils_val___args___a = fastn_utils.clone(fastn_utils.getter(__args__.a) + 1);
+    if (fastn_utils_val___args___a instanceof fastn.mutableClass) {
+      fastn_utils_val___args___a = fastn_utils_val___args___a.get();
+    }
     if (!fastn_utils.setter(__args__.a, fastn_utils_val___args___a)) {
       __args__.a = fastn_utils_val___args___a;
     }
@@ -3885,6 +3903,9 @@ ftd.increment_by = function (args) {
   try {
     let __args__ = args;
     let fastn_utils_val___args___a = fastn_utils.clone(fastn_utils.getter(__args__.a) + fastn_utils.getter(__args__.v));
+    if (fastn_utils_val___args___a instanceof fastn.mutableClass) {
+      fastn_utils_val___args___a = fastn_utils_val___args___a.get();
+    }
     if (!fastn_utils.setter(__args__.a, fastn_utils_val___args___a)) {
       __args__.a = fastn_utils_val___args___a;
     }
@@ -3928,6 +3949,9 @@ ftd.set_bool = function (args) {
   try {
     let __args__ = args;
     let fastn_utils_val___args___a = fastn_utils.clone(__args__.v);
+    if (fastn_utils_val___args___a instanceof fastn.mutableClass) {
+      fastn_utils_val___args___a = fastn_utils_val___args___a.get();
+    }
     if (!fastn_utils.setter(__args__.a, fastn_utils_val___args___a)) {
       __args__.a = fastn_utils_val___args___a;
     }
@@ -3941,6 +3965,9 @@ ftd.set_boolean = function (args) {
   try {
     let __args__ = args;
     let fastn_utils_val___args___a = fastn_utils.clone(__args__.v);
+    if (fastn_utils_val___args___a instanceof fastn.mutableClass) {
+      fastn_utils_val___args___a = fastn_utils_val___args___a.get();
+    }
     if (!fastn_utils.setter(__args__.a, fastn_utils_val___args___a)) {
       __args__.a = fastn_utils_val___args___a;
     }
@@ -3954,6 +3981,9 @@ ftd.set_string = function (args) {
   try {
     let __args__ = args;
     let fastn_utils_val___args___a = fastn_utils.clone(__args__.v);
+    if (fastn_utils_val___args___a instanceof fastn.mutableClass) {
+      fastn_utils_val___args___a = fastn_utils_val___args___a.get();
+    }
     if (!fastn_utils.setter(__args__.a, fastn_utils_val___args___a)) {
       __args__.a = fastn_utils_val___args___a;
     }
@@ -3967,6 +3997,9 @@ ftd.set_integer = function (args) {
   try {
     let __args__ = args;
     let fastn_utils_val___args___a = fastn_utils.clone(__args__.v);
+    if (fastn_utils_val___args___a instanceof fastn.mutableClass) {
+      fastn_utils_val___args___a = fastn_utils_val___args___a.get();
+    }
     if (!fastn_utils.setter(__args__.a, fastn_utils_val___args___a)) {
       __args__.a = fastn_utils_val___args___a;
     }
