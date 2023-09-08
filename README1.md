@@ -1,13 +1,15 @@
 # Header Component
 
-The **Header Component** is a simple and customizable way to display 
-business card information within your `fastn` pacakge. With just a few lines of 
-code, you can showcase your contact details, company information, even 
-include a logo and others.
+The **Header Component** is a UI element typically found at the top of a webpage
+or application. It serves as a menu or navigation tool, allowing users to easily 
+access different sections, pages, or features of the website or app.
+
+With just a few lines of code, you can showcase site logo, site name and sitemap
+details (sections and subsections).
 
 ## Preview
 
-Here's an example of how the Business Card Component might look when rendered:
+Here's an example of how the Header Component might look when rendered:
 
 ### Header
 
@@ -19,13 +21,13 @@ Here's an example of how the Business Card Component might look when rendered:
 
 To use the Business Card Component in your `fastn` package, follow these steps:
 
-1. **Add the Business Card Dependency**: Open your `FASTN.ftd` file and add 
-   the following line to include the Business Card component:
+1. **Add the Header Dependency**: Open your `FASTN.ftd` file and add 
+   the following line to include the Header component:
    ```ftd
    -- fastn.dependency: __user_name__.github.io/__repo_name__
    ```
-2. **Use the Business Card Component**: In the file where you want to add 
-   the business card (e.g., `index.ftd`), you can import the component and 
+2. **Use the Header Component**: In the file where you want to add 
+   the header (e.g., `index.ftd`), you can import the component and 
    use it like this:
     ```ftd
    -- import: __user_name__.github.io/__repo_name__ as header
