@@ -5,8 +5,6 @@ design using the `fastn` language. You can create designs which can be used
 by users to easily create professional business card by filling in their 
 information.
 
-[![Watch the video](https://img.youtube.com/vi/Rys5CI9KQsg/hqdefault.jpg)](https://youtu.be/Rys5CI9KQsg)
-
 
 ## Getting Started
 
@@ -23,7 +21,7 @@ The `index.ftd` file contains placeholders that you can replace with your own in
 
 ### 1. Replace Package Information
 
-In the section labeled "DOCUMENTATION FOR YOUR CARD COMPONENTS", locate the 
+In the section labeled "DOCUMENTATION FOR YOUR HEADER COMPONENTS", locate the 
 `docs.home component and check the following placeholders:
 
 **Note:** All these are auto-filled values during repository creation
@@ -33,7 +31,7 @@ In the section labeled "DOCUMENTATION FOR YOUR CARD COMPONENTS", locate the
 - `license-url`: URL to the license of your choice (e.g., MIT License) (This 
   is currently commented, you can uncomment it if you want to include license.)
 - `github`: Your GitHub Repository URL
-- `created-by`: Your name
+- `created-by`: The creator name (This is an optional field. You can fill this information)
 
 ### 2. Implement Header Components
 
@@ -52,7 +50,7 @@ component.
   (Optional for user)
 
 
-Replace the code present in the line numbers 32 to 38 with actual header 
+Replace the code present in the line numbers 32 to 39 with actual header 
 component implementation/definition.
 
 **Note:** It is **recommended** to create a `component/header.ftd`  files for
@@ -63,9 +61,7 @@ add image etc. (Checkout `FASTN.ftd` file).
 
 ## Fix the README.md content
 
-Replace the preview image with your template image 
-
-- For `image` side: In [`.github/assets/header.png`](.github/assets/header.png)
+Replace the preview image with your template image in [`.github/assets/header.png`](.github/assets/header.png)
 
 
 ## Publishing your category design on Github page:
@@ -85,7 +81,7 @@ This uses
   your header
 
 
-The documentation for this template comes from [`sitemap-header-template`](fastn-community.github.io/sitemap-header-template)
+The documentation for this template comes from [`sitemap-header-doc`](fastn-community.github.io/sitemap-header-doc)
 
 
 *To know more about `fastn`, visit [`fastn` website](https://fastn.com/). Also 
