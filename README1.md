@@ -19,7 +19,7 @@ Here's an example of how the Header Component might look when rendered:
 
 ## Getting Started
 
-To use the Business Card Component in your `fastn` package, follow these steps:
+To use the Header Component in your `fastn` package, follow these steps:
 
 1. **Add the Header Dependency**: Open your `FASTN.ftd` file and add 
    the following line to include the Header component:
@@ -39,9 +39,16 @@ To use the Business Card Component in your `fastn` package, follow these steps:
    
 ## Customization
 
-Feel free to customize the business card by adding, removing, or modifying 
+Feel free to customize the header by adding, removing, or modifying 
 fields.
 
 ## Fields
 
-Feel free to reach out if you have any questions or need further assistance. Happy coding!
+- `site-name`: *optional caption*: The name of the site.
+- `site-logo`: *optional ftd.image-src*: The logo of the site.
+- `site-url`: *string*: The url of the site.
+
+Feel free to reach out if you have any questions or need further assistance. 
+
+
+***Happy coding!***
