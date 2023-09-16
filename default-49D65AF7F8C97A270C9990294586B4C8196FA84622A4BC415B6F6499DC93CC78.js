@@ -472,6 +472,10 @@ class RecordInstance {
         }
         this.#closures.forEach((closure) => closure.update());
     }
+    setAndReturn(key, value) {
+        this.set(key, value);
+        return this;
+    }
     replace(obj) {
         for (let key in this.#fields) {
             if (!(key in obj.#fields)) {
@@ -1337,6 +1341,10 @@ class Node2 {
         }
     }
     updateParentPosition(value) {
+        if (ssr) {
+            let parent = this.#parent;
+            if (parent.style) parent.style["position"] = value;
+        }
         if (!ssr) {
             let current_node = this.#node;
             if (current_node) {
@@ -2298,19 +2306,27 @@ class Node2 {
                 this.#node.classList.remove("line-numbers");
             }
         } else if (kind === fastn_dom.PropertyKind.CodeTheme) {
+            this.#extraData.code = this.#extraData.code ? this.#extraData.code : {};
+            if(fastn_utils.isNull(staticValue)) {
+                if(!fastn_utils.isNull(this.#extraData.code.theme)) {
+                    this.#node.classList.remove(this.#extraData.code.theme);
+                }
+                return;
+            }
             if (!ssr) {
                 fastn_utils.addCodeTheme(staticValue);
             }
+            staticValue = fastn_utils.getStaticValue(staticValue);
             let theme = staticValue.replace("\.", "-");
-            this.#extraData.code = this.#extraData.code ? this.#extraData.code : {};
-            if (this.#extraData.code.theme) {
-                this.#node.classList.remove(theme);
+            if (this.#extraData.code.theme !== theme) {
+                let codeNode = this.#children[0].getNode();
+                this.#node.classList.remove(this.#extraData.code.theme);
+                codeNode.classList.remove(this.#extraData.code.theme);
+                this.#extraData.code.theme = theme;
+                this.#node.classList.add(theme);
+                codeNode.classList.add(theme);
+                fastn_utils.highlightCode(codeNode, this.#extraData.code);
             }
-            this.#extraData.code.theme = theme;
-            this.#node.classList.add(theme);
-            let codeNode = this.#children[0].getNode();
-            codeNode.classList.add(theme);
-            fastn_utils.highlightCode(codeNode, this.#extraData.code);
         } else if (kind === fastn_dom.PropertyKind.CodeLanguage) {
             let language = `language-${staticValue}`;
             this.#extraData.code = this.#extraData.code ? this.#extraData.code : {};
@@ -2366,8 +2382,7 @@ class Node2 {
         } else if (kind === fastn_dom.PropertyKind.StringValue) {
             this.#rawInnerValue = staticValue;
             if (!ssr) {
-                let escapedHtmlValue = fastn_utils.escapeHtmlInMarkdown(staticValue);
-                staticValue = fastn_utils.markdown_inline(escapedHtmlValue);
+                staticValue = fastn_utils.markdown_inline(staticValue);
                 staticValue = fastn_utils.process_post_markdown(this.#node, staticValue);
             }
             this.#node.innerHTML = staticValue;
@@ -2666,6 +2681,28 @@ let fastn_utils = {
         }*/ else {
            return obj;
         }
+    },
+    getInheritedValues(default_args, inherited, function_args) {
+        let record_fields = {
+            "colors": ftd.default_colors.getClone().setAndReturn("is-root", true),
+            "types": ftd.default_types.getClone().setAndReturn("is-root", true)
+        }
+        Object.assign(record_fields, default_args);
+        let fields = {};
+        if (inherited instanceof fastn.recordInstanceClass) {
+            fields = inherited.getAllFields();
+            if (fields["colors"].get("is-root")) {
+               delete fields.colors;
+            }
+            if (fields["types"].get("is-root")) {
+               delete fields.types;
+            }
+        }
+        Object.assign(record_fields, fields);
+        Object.assign(record_fields, function_args);
+        return fastn.recordInstance({
+              ...record_fields
+        });
     },
     removeNonFastnClasses(node) {
         let classList = node.getNode().classList;
@@ -3030,21 +3067,22 @@ let fastn_utils = {
     },
 
     escapeHtmlInMarkdown(str) {
+        if(typeof str !== 'string') {
+            return str;
+        }
+
         let result = "";
         let ch_map = {
-            '<': "&lt;"
+            '<': "&lt;",
+            '>': "&gt;",
+            '&': "&amp;",
+            '"': "&quot;",
+            "'": "&#39;",
+            '/': "&#47;",
         };
-        // To avoid replacing html characters inside <code> body
-        let backtick_found = false;
         for (var i = 0; i < str.length; i++) {
             let current = str[i];
-            if (current === '`') backtick_found = !backtick_found;
-            if (ch_map[current] !== undefined && !backtick_found) {
-                result += ch_map[current];
-            }
-            else {
-                result += current;
-            }
+            result += ch_map[current] ?? current;
         }
         return result;
     },
@@ -3239,7 +3277,7 @@ class Node {
     toHtmlAsString() {
         const openingTag = `<${this.#tagName}${this.getDataIdString()}${this.getAttributesString()}${this.getClassString()}${this.getStyleString()}>`;
         const closingTag = `</${this.#tagName}>`;
-        const innerHTML = this.innerHTML;
+        const innerHTML = fastn_utils.escapeHtmlInMarkdown(this.innerHTML);
         const childNodes = this.#children.map(child => child.toHtmlAsString()).join('');
 
         return `${openingTag}${innerHTML}${childNodes}${closingTag}`;
@@ -4630,6 +4668,6 @@ ftd.breakpoint_width = fastn.recordInstance({
 });
 ftd.device = fastn.mutable(fastn_dom.DeviceData.Desktop);
 let inherited = fastn.recordInstance({
-  colors: ftd.default_colors,
-  types: ftd.default_types
+  colors: ftd.default_colors.getClone().setAndReturn("is_root", true),
+  types: ftd.default_types.getClone().setAndReturn("is_root", true)
 });
