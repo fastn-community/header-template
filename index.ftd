@@ -24,7 +24,7 @@ license-url: NULL
 -- component header:
 optional caption site-name:
 optional ftd.image-src site-logo:
-string site-url:
+optional string site-url:
 
 ;; =============================================================================
 ;; =======================<IMPLEMENT THE HEADER HERE>===========================
