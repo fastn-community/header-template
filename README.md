@@ -15,7 +15,7 @@ To use this template, follow the steps below:
 3. Clone this newly created repository to your local machine.
 4. Open the `fastn` file named `index.ftd` in a text editor.
 
-## Creating a new Business Card category
+## Creating a new Header Design
 
 The `index.ftd` file contains placeholders that you can replace with your own information. Here's what you need to do:
 
@@ -52,6 +52,10 @@ component.
 
 Replace the code present in the line numbers 32 to 39 with actual header 
 component implementation/definition.
+
+Also, you need to use sitemap data (section and subsection) to show it in 
+header. So, go to `data.ftd` and use either `sitemap` or `full-sitemap` 
+variables.
 
 **Note:** It is **recommended** to create a `component/header.ftd`  files for
 implementing components respectively.
